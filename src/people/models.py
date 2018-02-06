@@ -14,3 +14,8 @@ class Contact(models.Model):
         max_length=13,
         unique=True
     )
+
+    def __str__(self):
+        return "contact {name} with email: {email}".format(
+            name=self.name, email=self.email
+        )
