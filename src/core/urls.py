@@ -17,7 +17,12 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from people import views
+
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
+ 
+    url(r'contacts/', include('people.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
