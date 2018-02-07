@@ -33,6 +33,12 @@ $ git clone git@github.com:curious725/django_form_validation_task.git
 * Use these commands:
 ```bash
  $ cd /django_form_validation_task
+ $ cp sample.secrets.json secrets.json
+```
+Put your values in secrets.json file. 
+And finally run:
+
+ ```bash
  $ vagrant up dev
   ```
   
