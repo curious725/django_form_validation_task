@@ -2,9 +2,12 @@
 
 
 {% block content %}
-<h1>
-  Contacts List
-</h1>
+<div class="add-new-contact">
+  <a href="{% url 'contacts:new_contact' %}" class="btn btn-primary">
+    New Contact
+  </a>
+</div>
+
 <table class="table">
   <thead>
     <tr>
