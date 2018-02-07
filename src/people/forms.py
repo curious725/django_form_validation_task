@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 from .models import Contact
 
@@ -25,11 +26,18 @@ class ContactForm(forms.ModelForm):
     )
     phone = forms.CharField(
         validators=[validate_phone],
-        widget=forms.TextInput(
-            attrs={'pattern': '[0-9]{5-13}', 'title': 'Enter digits only'}
-        )
+        required=False
     )
 
     class Meta:
         model = Contact
         fields = ['name', 'email', 'phone']
+        widgets = {
+            'phone': forms.TextInput(
+                attrs={'pattern': '[0-9]{5-13}'}
+            )
+        }
+        help_texts = {
+            'name': _('The name field should have at least 2 characters.'),
+            'phone': _('The phone field should have from 5 till 13 digits'),
+        }
