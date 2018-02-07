@@ -7,6 +7,8 @@ from .models import Contact
 def validate_name(name):
     if len(name) < 2:
         raise ValidationError('Ensure this value has at least 2 characters')
+    if len(name) > 50:
+        raise ValidationError('Ensure this value has at most 50 characters')
 
 
 def validate_phone(phone):
@@ -23,19 +25,15 @@ def validate_phone(phone):
 class ContactForm(forms.ModelForm):
     name = forms.CharField(
         validators=[validate_name],
-        help_text="The name field should have at least 2 characters."
+        help_text="*required Name field should have at least 2 and at most 50 characters."
     )
     phone = forms.CharField(
         validators=[validate_phone],
         required=False,
         widget=forms.TextInput(attrs={'pattern': '[0-9]{5-13}'}),
-        help_text="The phone field should have from 5 till 13 digits"
+        help_text="*required Phone field should have from 5 till 13 digits"
     )
 
     class Meta:
         model = Contact
         fields = ['name', 'email', 'phone']
-        # help_texts = {
-        #     'name': _('The name field should have at least 2 characters.'),
-        #     'phone': _('The phone field should have from 5 till 13 digits'),
-        # }
